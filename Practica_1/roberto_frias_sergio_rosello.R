@@ -24,6 +24,11 @@ tablaAgeClass <- adult[, c(1,14)]
 
 hist(adult$Age, breaks = 1:100)
 
+
+edades <- table(adult$Age)
+
+as.integer(edades[2])
+
 numeroedadesmenor <- c()
 numeroedadesmayor <- c()
 
