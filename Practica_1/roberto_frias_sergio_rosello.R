@@ -3,68 +3,35 @@ if (!"package:ggplot2" %in% search()) {
 }
 
 library(ggplot2)
-
 adult <- read.csv("adult.prac1.csv")
 
-nrow(adult)
-ncol(adult)
-adult[1,1]
-adult[150,5]
+
 
 #1. Genere las gráficas necesarias para visualizar las diferencias de ingresos en función de las demás
 #variables, tanto categóricas como numéricas. (3.5 punto)
 
+#Indica los posibles valores que puede tomar cualquier fila en esa determinada columna
 valClass <- levels(adult$class)
 
-
-
+#Genera una tabla de dos columnas, "la de edad y la de dinero"Age" y "Class"
 tablaAgeClass <- adult[, c(1,14)]
 
 
-
+#Genera un histograma de adult age vs frequency
 hist(adult$Age, breaks = 1:100)
 
-
+#Genera un array guardando el numero de veces que aparece cada numero en la calumna de edades
 edades <- table(adult$Age)
 
+#Imprime solo el numero de veces que aparece el numero de la casilla numero 2 del array.
 as.integer(edades[2])
 
-numeroedadesmenor <- c()
-numeroedadesmayor <- c()
-
-
-for(j in 1:nrow(adult)){
-  valormayor <- 0
-  valormenor <- 0
-  for(i in 1:100){
-
-    if(adult[j,1] == i)
-    { 
-      print("hola")
-      valormenor <- sum(valormenor + 1)
-    }
-    if(adult[j, 1]) {
-      valormayor <- sum(valormayor + 1)
-    }
-  }
-  valormayorVector <- c(valormayor)
-  valormenorVector <- c(valormenor)
-  
-  append(numeroedadesmayor, valormayor)
-  append(numeroedadesmenor, valormenor)
+#Imprime el numero que aparece en la tabla y el numero de veces que aparece en la tabla.
+print(edades[2])
+#Bucle que recorre edades e imprime el numero de veces que aparecen sus numeros
+for(i in edades){
+  print(i)
 }
-
-
-dat1 <- data.frame(
-  sex = factor(c("Female","Female","Male","Male")),
-  time = factor(c("Lunch","Dinner","Lunch","Dinner"), levels=c("Lunch","Dinner")),
-  total_bill = c(13.53, 16.81, 16.24, 17.42)
-)
-dat1
-
-ggplot(data=tablaAgeClass, aes(x=age, y=number_people, fill=class) +
-  geom_bar(stat="identity", position=position_dodge())
-
 
 
 #2. Obtenga las medidas de tendencia central de cada una de las variables numéricas para cada una de las dos
