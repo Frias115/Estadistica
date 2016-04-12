@@ -5,33 +5,76 @@ if (!"package:ggplot2" %in% search()) {
 library(ggplot2)
 adult <- read.csv("adult.prac1.csv")
 
-
+#http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/
 
 #1. Genere las gráficas necesarias para visualizar las diferencias de ingresos en función de las demás
 #variables, tanto categóricas como numéricas. (3.5 punto)
 
-#Indica los posibles valores que puede tomar cualquier fila en esa determinada columna
-valClass <- levels(adult$class)
+ClassMayor <- adult[grep(">50K.",adult$class), ]
+ClassMenor <- adult[grep("<=50K.",adult$class), ]
 
-#Genera una tabla de dos columnas, "la de edad y la de dinero"Age" y "Class"
-tablaAgeClass <- adult[, c(1,14)]
+#//////////////////////////////////Age y class//////////////////////////////////
 
+#Generamos unas tablas 
+auxMayor <- table(ClassMayor$Age)
+auxMenor <- table(ClassMenor$Age)
 
-#Genera un histograma de adult age vs frequency
-hist(adult$Age, breaks = 1:100)
+finalMayor <- data.frame(
+  number_people = c(auxMayor),
+  Age = c(rownames(auxMayor)),
+  class = c(">50K.")
+)
 
-#Genera un array guardando el numero de veces que aparece cada numero en la calumna de edades
-edades <- table(adult$Age)
+finalMenor <- data.frame(
+  number_people = c(auxMenor),
+  Age = c(rownames(auxMenor)),
+  class = c("<=50K.")
+)
 
-#Imprime solo el numero de veces que aparece el numero de la casilla numero 2 del array.
-as.integer(edades[2])
+final <- merge(finalMenor,finalMayor,all=TRUE)
 
-#Imprime el numero que aparece en la tabla y el numero de veces que aparece en la tabla.
-print(edades[2])
-#Bucle que recorre edades e imprime el numero de veces que aparecen sus numeros
-for(i in edades){
-  print(i)
-}
+#Histograma sencillo
+ggplot(adult, aes(x=Age, fill=class)) +
+  geom_histogram(binwidth=.5, position="identity") 
+
+#Grafico de barras en detalle
+ggplot(data=final, aes(x=Age, y=number_people, fill=class)) +
+  geom_bar(stat="identity")
+
+#Diagrma de densidad
+ggplot(adult, aes(x=Age, fill=class)) + geom_density(alpha=.4, size = 0.4)
+
+#//////////////////////////////////workclass y class//////////////////////////////////
+
+#Generamos unas tablas 
+auxMayor <- table(ClassMayor$workclass)
+auxMenor <- table(ClassMenor$workclass)
+
+finalMayor <- data.frame(
+  number_people = c(auxMayor),
+  workclass = c(rownames(auxMayor)),
+  class = c(">50K.")
+)
+
+finalMenor <- data.frame(
+  number_people = c(auxMenor),
+  workclass = c(rownames(auxMenor)),
+  class = c("<=50K.")
+)
+
+final <- merge(finalMenor,finalMayor,all=TRUE)
+
+#Histograma sencillo
+ggplot(adult, aes(x=workclass, fill=class)) +
+  geom_histogram(binwidth=.5, position="identity") 
+
+#Grafico de barras en detalle
+ggplot(data=final, aes(x=workclass, y=number_people, fill=class)) +
+  geom_bar(stat="identity")
+
+#Diagrma de densidad
+ggplot(adult, aes(x=workclass, fill=class)) + geom_density(alpha=.4, size = 0.4)
+
 
 
 #2. Obtenga las medidas de tendencia central de cada una de las variables numéricas para cada una de las dos
