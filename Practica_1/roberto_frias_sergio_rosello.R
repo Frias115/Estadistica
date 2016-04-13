@@ -1,8 +1,11 @@
-if (!"package:ggplot2" %in% search()) { 
+
+if (!"package:ggplot2" %in% search() ||!"package:e1071" %in% search()) { 
   install.packages("ggplot2")
+  install.packages("e1071")
 }
 
 library(ggplot2)
+library(e1071)
 adult <- read.csv("adult.prac1.csv")
 
 #http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/
@@ -44,6 +47,9 @@ ggplot(data=final, aes(x=Age, y=number_people, fill=class)) +
 #Diagrma de densidad
 ggplot(adult, aes(x=Age, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////workclass y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -68,6 +74,9 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 ggplot(data=final, aes(x=workclass, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////education y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -91,6 +100,9 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 #Grafico de barras en detalle
 ggplot(data=final, aes(x=education, y=number_people, fill=class)) +
   geom_bar(stat="identity")
+
+#Conclusion de los datos:
+#
 
 #//////////////////////////////////education.num y class//////////////////////////////////
 
@@ -123,6 +135,8 @@ ggplot(data=final, aes(x=education.num, y=number_people, fill=class)) +
 #Diagrma de densidad
 ggplot(adult, aes(x=education.num, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
+#Conclusion de los datos:
+#
 
 #//////////////////////////////////marital.status y class//////////////////////////////////
 
@@ -148,6 +162,9 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 ggplot(data=final, aes(x=marital.status, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////occupation y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -172,6 +189,8 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 ggplot(data=final, aes(x=occupation, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
+#Conclusion de los datos:
+#
 
 #//////////////////////////////////relationship y class//////////////////////////////////
 
@@ -197,6 +216,9 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 ggplot(data=final, aes(x=relationship, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////race y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -221,6 +243,9 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 ggplot(data=final, aes(x=race, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////sex y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -244,6 +269,9 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 #Grafico de barras en detalle
 ggplot(data=final, aes(x=sex, y=number_people, fill=class)) +
   geom_bar(stat="identity")
+
+#Conclusion de los datos:
+#
 
 #//////////////////////////////////capital.gain y class//////////////////////////////////
 
@@ -271,6 +299,9 @@ ggplot(data=final, aes(x=capital.gain, y=number_people, fill=class)) +
 
 #Diagrma de densidad
 ggplot(adult, aes(x=capital.gain, fill=class)) + geom_density(alpha=.4, size = 0.4)
+
+#Conclusion de los datos:
+#
 
 #//////////////////////////////////capital.loss y class//////////////////////////////////
 
@@ -303,6 +334,9 @@ ggplot(data=final, aes(x=capital.loss, y=number_people, fill=class)) +
 #Diagrma de densidad
 ggplot(adult, aes(x=capital.loss, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////hours.per.week y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -334,6 +368,9 @@ ggplot(data=final, aes(x=hours.per.week, y=number_people, fill=class)) +
 #Diagrma de densidad
 ggplot(adult, aes(x=hours.per.week, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
+#Conclusion de los datos:
+#
+
 #//////////////////////////////////native.country y class//////////////////////////////////
 
 #Generamos unas tablas 
@@ -357,6 +394,10 @@ final <- merge(finalMenor,finalMayor,all=TRUE)
 #Grafico de barras en detalle
 ggplot(data=final, aes(x=native.country, y=number_people, fill=class)) +
   geom_bar(stat="identity")
+
+#Conclusion de los datos:
+#
+
 
 #2. Obtenga las medidas de tendencia central de cada una de las variables numéricas para cada una de las dos
 #posibles clases. ¿Existe diferencia? (1 punto)
@@ -670,10 +711,67 @@ cat(" Recorrido de >50K.:",                 rangeMayor,"               | Recorri
 #5. Con respecto a las medidas de asimetría, ¿que podríamos indicar de la distribución de cada una de las
 #variables númericas de las dos clases? (1 punto)
 
+#Clases numericas: Age, education.num, capital.gain, capital.loss y hours.per.week
 
+#skewness() del paquete "e1071"
 
+ClassMayor <- adult[grep(">50K.",adult$class), ]
+ClassMenor <- adult[grep("<=50K.",adult$class), ]
+
+#//////////////////////////////////Age//////////////////////////////////
+
+#Skewness
+skewnessMayor <- skewness(ClassMayor$Age)
+skewnessMenor <- skewness(ClassMenor$Age)
+
+cat(" Distribucion de >50K.:",  skewnessMayor,   "| Distribucion de <=50K.:",       skewnessMenor,    "\n",
+    "Los valores nos permiten saber que >50K. tiene asimetria a la derecha y <=50K. tambien")
+
+#//////////////////////////////////education.num//////////////////////////////////
+
+#Skewness
+skewnessMayor <- skewness(ClassMayor$education.num)
+skewnessMenor <- skewness(ClassMenor$education.num)
+
+cat(" Distribucion de >50K.:",  skewnessMayor,   "| Distribucion de <=50K.:",       skewnessMenor,    "\n",
+    "Los valores nos permiten saber que >50K. tiene asimetria a la izquierda y <=50K. tambien")
+
+#//////////////////////////////////capital.gain//////////////////////////////////
+
+#Skewness
+skewnessMayor <- skewness(ClassMayor$capital.gain)
+skewnessMenor <- skewness(ClassMenor$capital.gain)
+
+cat(" Distribucion de >50K.:",  skewnessMenor,   "| Distribucion de <=50K.:",       skewnessMenor,    "\n",
+    "Los valores nos permiten saber que >50K. tiene asimetria a la derecha y <=50K. tambien")
+
+#//////////////////////////////////capital.loss//////////////////////////////////
+
+#Skewness
+skewnessMayor <- skewness(ClassMayor$capital.loss)
+skewnessMenor <- skewness(ClassMenor$capital.loss)
+
+cat(" Distribucion de >50K.:",  skewnessMenor,   "| Distribucion de <=50K.:",       skewnessMenor,    "\n",
+    "Los valores nos permiten saber que >50K. tiene asimetria a la derecha y <=50K. tambien")
+
+#//////////////////////////////////hours.per.week//////////////////////////////////
+
+#Skewness
+skewnessMayor <- skewness(ClassMayor$hours.per.week)
+skewnessMenor <- skewness(ClassMenor$hours.per.week)
+
+cat(" Distribucion de >50K.:",  skewnessMenor,   "| Distribucion de <=50K.:",       skewnessMenor,    "\n",
+    "Los valores nos permiten saber que >50K. tiene asimetria a la derecha y <=50K. tambien")
 
 #6. Realice un ajuste de mínimos cuadrados entre la variable horas por semana y nivel de educación. Indique
 #la precisión del ajuste. (2.5 punto)
 
+#lsfit(), ls.diag()
+
+ClassMayor <- adult[grep(">50K.",adult$class), ]
+ClassMenor <- adult[grep("<=50K.",adult$class), ]
+
+ajuste <- lsfit(adult$hours.per.week, adult$education.num)
+
+ls.diag(ajuste)
 
