@@ -766,12 +766,26 @@ cat(" Distribucion de >50K.:",  skewnessMenor,   "| Distribucion de <=50K.:",   
 #6. Realice un ajuste de mínimos cuadrados entre la variable horas por semana y nivel de educación. Indique
 #la precisión del ajuste. (2.5 punto)
 
-#lsfit(), ls.diag()
+#lm(), cor()
 
 ClassMayor <- adult[grep(">50K.",adult$class), ]
 ClassMenor <- adult[grep("<=50K.",adult$class), ]
 
-ajuste <- lsfit(adult$hours.per.week, adult$education.num)
+#Fitting Linear Models
+hours.per.week <- c(adult$hours.per.week)
+education.num <- c(adult$education.num)
+plot(hours.per.week, education.num)
 
-ls.diag(ajuste)
+ajus <- lm(hours.per.week ~ education.num)
+ajus
+abline(ajus, col = 2)
+abline(15.06, -0.048, lty=2, col = 4)
+legend(40, 14.5, c("l�nea de regresion"), lty = c(1))
 
+#Correlation
+precision <- cor(hours.per.week, education.num)
+cat(" La precision del ajuste es:",  precision, ", lo que nos indica que si hay una correlacion 
+ entre los valores de hours.per.week y education.num, aunque esta bastante cerca de 0 por 
+ lo que no es una correlacion muy fuerte.")
+    
+    
