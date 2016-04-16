@@ -50,9 +50,9 @@ ggplot(adult, aes(x=Age, fill=class)) + geom_density(alpha=.4, size = 0.4)
 #Conclusion de los datos:
 #Estos datos muestran que hay mas gente que gana menos de 50.000
 #y que a partir de los 25 incrementa el numero de gente que gana mas de 50.000
-#y decrementa el numero de gente que gana menos de 50.000, pero nunca superan 
-#a la gente que gana mas de 50.000
-
+#y decrementa el numero de gente que gana menos de 50.000, pero siempre hay mas gente
+#que gana menos de 50.000. 
+#La encuesta tambien se ha preguntado a mucha mas gente joven (<50)que a gente mayor. 
 
 #//////////////////////////////////workclass y class//////////////////////////////////
 
@@ -145,7 +145,8 @@ ggplot(data=final, aes(x=education.num, y=number_people, fill=class)) +
 ggplot(adult, aes(x=education.num, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
 #Conclusion de los datos:
-#
+#A medida que aumentan los estudios de la gente, aumenta el numero de gente que 
+#gana mas de 50.000. 
 
 #//////////////////////////////////marital.status y class//////////////////////////////////
 
@@ -229,7 +230,7 @@ ggplot(data=final, aes(x=relationship, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#Por lo general, hay mas gente que gana mas de 50.000 que gente que gana menos de 50.000.
+#Por lo general, hay mas gente que gana menos de 50.000 que gente que gana mas de 50.000.
 #Son particularmente interesantes las columnas de "Husband" y "wife" ya que uno asumiria
 #que la mayoria de los matrimonios estan compuestos por matido y mujer pero esta grafica
 #no sugiere eso. Esta grafica sugiere que hay muchos mas maridos que mujeres en un matrimonio,
@@ -289,7 +290,7 @@ ggplot(data=final, aes(x=sex, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#Esta grafiac me indica que se ha entrevistado a mas hombres que a mujeres, por tanto responde
+#Esta grafica indica que se ha entrevistado a mas hombres que a mujeres, por tanto responde
 #a mi suposicion anterior. Tambien indica que la mayoria de hombres y mujeres ganan menos de 50.000
 #pero que en relacion, hay mas hombres que ganan mas de 50.000 que mujeres que ganan mas de 50.000
 
@@ -345,10 +346,6 @@ finalMenor <- data.frame(
 
 final <- merge(finalMenor,finalMayor,all=TRUE)
 
-#Histograma sencillo
-ggplot(adult, aes(x=capital.loss, fill=class)) +
-  geom_histogram(binwidth=.5, position="identity") 
-
 #Grafico de barras en detalle
 ggplot(data=final, aes(x=capital.loss, y=number_people, fill=class)) +
   geom_bar(stat="identity")
@@ -359,7 +356,7 @@ ggplot(adult, aes(x=capital.loss, fill=class)) + geom_density(alpha=.4, size = 0
 #Conclusion de los datos:
 #Esta grafica concuerda con la anterior ya que hay mucha mas gente que no pierde nada,
 #que simplenente se sustienta con lo que gana. 
-#Esta grafica tambien indica que la gente que pierde mas de 1590 euros, tiene mas de 50.000
+#Esta grafica tambien indica que la gente que pierde mas de 1590 dolares, tiene mas de 50.000
 
 #//////////////////////////////////hours.per.week y class//////////////////////////////////
 
@@ -424,8 +421,7 @@ ggplot(data=final, aes(x=native.country, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#Los datos indican que con mucha seguridad, la encuesta se ha realizado en los Estados Unidos de America
-#ya que el numero de personas cuyo pais natal son los Estados Unidos de America es muy superior a los otros.
+#El pais natal mas comun es America
 #El numero de gente que tiene mas de 50.000 es mucho menor a el numero de gente que tiene menos de 50.000.
 
 
@@ -464,6 +460,10 @@ cat(" Media de >50K.:",  meanMayor,   "| Media de <=50K.:",   meanMenor,   "\n",
     "Moda de >50K.:",    modeMayor,   "       | Moda de <=50K.:", modeMenor, "\n",
     "Los valores son diferentes en todos los casos")
 
+#Conclusion de los datos:
+#La media, mediana y moda de los mayores de 50.000 estan muy cerca mientras 
+#que la moda de menos de 50.000 esta muy separada de su mediana y su media. 
+
 #//////////////////////////////////education.num//////////////////////////////////
 
 #Mean
@@ -483,6 +483,9 @@ cat(" Media de >50K.:",  meanMayor,   "| Media de <=50K.:",   meanMenor,   "\n",
     "Moda de >50K.:",    modeMayor,   "       | Moda de <=50K.:", modeMenor, "\n",
     "Los valores son diferentes en todos los casos")
 
+#Conclusion de los datos:
+#La media, mediana y moda se relacionan en ambos casos.
+
 #//////////////////////////////////capital.gain//////////////////////////////////
 
 #Mean
@@ -501,6 +504,7 @@ cat(" Media de >50K.:",  meanMayor,   "| Media de <=50K.:",   meanMenor,   "\n",
     "Mediana de >50K.:", medianMayor, "    | Mediana de <=50K.:", medianMenor, "\n",
     "Moda de >50K.:",    modeMayor,   "       | Moda de <=50K.:", modeMenor, "\n",
     "Los valores son diferentes en la media, pero iguales en la mediana y la moda")
+
 
 #//////////////////////////////////capital.loss//////////////////////////////////
 
@@ -540,6 +544,9 @@ cat(" Media de >50K.:",  meanMayor,   "| Media de <=50K.:",   meanMenor,   "\n",
     "Moda de >50K.:",    modeMayor,   "       | Moda de <=50K.:", modeMenor, "\n",
     "Los valores son diferentes en la media, pero iguales en la mediana y la moda")
 
+#Conclusion de los datos:
+#Que la mediana y la moda sean iguales en los que sacan mas de 50.000 y menos de 50.000
+#nos indica que el numero de horas no esta directamente relacionada con los ingresos.
 
 #3. Obtenga los cuartiles y los percentiles de cada una de las variables numéricas para cada una de las dos
 #posisbles clases. ¿Existe diferencia? (1 punto)
@@ -816,6 +823,6 @@ legend(40, 14.5, c("l�nea de regresion"), lty = c(1))
 precision <- cor(hours.per.week, education.num)
 cat(" La precision del ajuste es:",  precision, ", lo que nos indica que si hay una correlacion 
  entre los valores de hours.per.week y education.num, aunque esta bastante cerca de 0 por 
- lo que no es una correlacion muy fuerte.")
+ lo que hay una correlacion minima.")
     
     
