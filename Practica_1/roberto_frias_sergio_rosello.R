@@ -48,7 +48,11 @@ ggplot(data=final, aes(x=Age, y=number_people, fill=class)) +
 ggplot(adult, aes(x=Age, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
 #Conclusion de los datos:
-#
+#Estos datos muestran que hay mas gente que gana menos de 50.000
+#y que a partir de los 25 incrementa el numero de gente que gana mas de 50.000
+#y decrementa el numero de gente que gana menos de 50.000, pero nunca superan 
+#a la gente que gana mas de 50.000
+
 
 #//////////////////////////////////workclass y class//////////////////////////////////
 
@@ -75,7 +79,9 @@ ggplot(data=final, aes(x=workclass, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Estos datos, representados en un diagramama de barras, muestran que
+#excepto en los "self-employed", en todos los demas tipos de trabajos predominan los salarios
+#inferiores a los 50.000. Excepto los que no han trabajado nunca, que no tienen ingresos.
 
 #//////////////////////////////////education y class//////////////////////////////////
 
@@ -102,7 +108,10 @@ ggplot(data=final, aes(x=education, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Estos datos, representados en un diagramama de barras, muestran que
+#excepto la gente que tiene estudios masters, doctorados y prof-school, que son una minoria,
+#es mucho mas comun que el resto de gente con estudios gane menos de 50.000 siendo "hs-grad"
+#el tipo de estudion mas comun entre la poblacion.
 
 #//////////////////////////////////education.num y class//////////////////////////////////
 
@@ -163,7 +172,9 @@ ggplot(data=final, aes(x=marital.status, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Independientemente del tipo de matrimonio, hay mas matrimonios que ganan menos de 50.000 
+#que matrimonios que ganan mas de 50.000 y los matrimonios mas
+#comunes son: gente que se casa con civiles y gente que no se casa.
 
 #//////////////////////////////////occupation y class//////////////////////////////////
 
@@ -190,7 +201,8 @@ ggplot(data=final, aes(x=occupation, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Hay mucha mas gente que gana menos de 50.000 a gente que gana mas de 50.000 en
+#cualquier disciplina de trabajo, siendo "other-service" la que mas diferencia tiene.
 
 #//////////////////////////////////relationship y class//////////////////////////////////
 
@@ -217,7 +229,12 @@ ggplot(data=final, aes(x=relationship, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Por lo general, hay mas gente que gana mas de 50.000 que gente que gana menos de 50.000.
+#Son particularmente interesantes las columnas de "Husband" y "wife" ya que uno asumiria
+#que la mayoria de los matrimonios estan compuestos por matido y mujer pero esta grafica
+#no sugiere eso. Esta grafica sugiere que hay muchos mas maridos que mujeres en un matrimonio,
+#por tanto, me hace sospechar que o se ha entrevistado a mas hombres que a mujeres o que
+#hay mas matrimonios homosexuales que heterosexuales.
 
 #//////////////////////////////////race y class//////////////////////////////////
 
@@ -244,7 +261,8 @@ ggplot(data=final, aes(x=race, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Estos datos, representado en un histograma, indican que la raza mas comun, es la blanca.
+#Tambien indican que en ninguna de las razas es mas comun ganar mas de 50.000 
 
 #//////////////////////////////////sex y class//////////////////////////////////
 
@@ -271,7 +289,9 @@ ggplot(data=final, aes(x=sex, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Esta grafiac me indica que se ha entrevistado a mas hombres que a mujeres, por tanto responde
+#a mi suposicion anterior. Tambien indica que la mayoria de hombres y mujeres ganan menos de 50.000
+#pero que en relacion, hay mas hombres que ganan mas de 50.000 que mujeres que ganan mas de 50.000
 
 #//////////////////////////////////capital.gain y class//////////////////////////////////
 
@@ -301,7 +321,9 @@ ggplot(data=final, aes(x=capital.gain, y=number_people, fill=class)) +
 ggplot(adult, aes(x=capital.gain, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
 #Conclusion de los datos:
-#
+#Esta grafica indica que hay mucha gente que no ganan nada, simplemente se mantiene
+#economicamente con lo que cobra. Hay mucha mas gente que gana menos de 50.000 que 
+#gente que gana mas de 50.000.
 
 #//////////////////////////////////capital.loss y class//////////////////////////////////
 
@@ -335,7 +357,9 @@ ggplot(data=final, aes(x=capital.loss, y=number_people, fill=class)) +
 ggplot(adult, aes(x=capital.loss, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
 #Conclusion de los datos:
-#
+#Esta grafica concuerda con la anterior ya que hay mucha mas gente que no pierde nada,
+#que simplenente se sustienta con lo que gana. 
+#Esta grafica tambien indica que la gente que pierde mas de 1590 euros, tiene mas de 50.000
 
 #//////////////////////////////////hours.per.week y class//////////////////////////////////
 
@@ -369,7 +393,11 @@ ggplot(data=final, aes(x=hours.per.week, y=number_people, fill=class)) +
 ggplot(adult, aes(x=hours.per.week, fill=class)) + geom_density(alpha=.4, size = 0.4)
 
 #Conclusion de los datos:
-#
+#Esta grafica indica que el numero de horas mas comunes de trabajo/semana es 40, con 6000
+#personas. 
+#La gente normalmente gana menos de 50.000, pero el numero de gente que gana mas de 50.000 aumenta 
+#a la vez que aumentan las horas trabajadas por semana, hasta las 59. 
+
 
 #//////////////////////////////////native.country y class//////////////////////////////////
 
@@ -396,7 +424,9 @@ ggplot(data=final, aes(x=native.country, y=number_people, fill=class)) +
   geom_bar(stat="identity")
 
 #Conclusion de los datos:
-#
+#Los datos indican que con mucha seguridad, la encuesta se ha realizado en los Estados Unidos de America
+#ya que el numero de personas cuyo pais natal son los Estados Unidos de America es muy superior a los otros.
+#El numero de gente que tiene mas de 50.000 es mucho menor a el numero de gente que tiene menos de 50.000.
 
 
 #2. Obtenga las medidas de tendencia central de cada una de las variables numéricas para cada una de las dos
