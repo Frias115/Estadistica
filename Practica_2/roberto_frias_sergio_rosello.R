@@ -36,11 +36,7 @@ pbinom(2, size=8, prob=0.5)
 #   3. ¿Cuál es la probabilidad de que acierte 5 o más? (1 punto)
 
 #Formula
-result1 <- pbinom(8, size=8, prob=0.5) 
-result2 <- pbinom(4, size=8, prob=0.5)
-result <- result1 - result2
-result
-
+pbinom(4, size=8, prob=0.5, lower.tail = FALSE)
 
 #2. Distribución de Poisson
 #Una determinada región de Estados Unidos es afectada, en promedio, por 6 huracanes al año. Si se
@@ -95,9 +91,6 @@ pgeom(6, prob = 1/10)
 
 #-----Modelos unidimensionales continuos-----:
 #6. Distribución Normal
-
-
-
 #7. Distribución T de Student
 #Trabajando directamente en R, para calcular los cuantiles normales se usaría la función qnorm y
 #sus parámetros necesarios. Por ejemplo para hallar el valor de la abscisa que en una N(0,1)
@@ -113,15 +106,63 @@ pgeom(6, prob = 1/10)
 #de 10 grados de libertad y que las puntuaciones de creatividad y extroversión son
 #independientes:
 #   1. ¿Cuantos candidatos serán seleccionados? (1 punto)
+
+porcentaje1 <- 1 - 0.8
+porcentaje2 <- 1 - 0.8
+
+porcentaje <- porcentaje1 * porcentaje2
+
+result <- porcentaje * 50
+result
+
 #   2. Dibuje las gráficas de densidad de las variables extroversión y creatividad. (1 punto)
 
+#Densidad extroversion
+dnorm(.8, mean=5, sd=1)
+
+dat <- data.frame(variables = factor(rep(c("Extroversion"), each=50)), 
+                  rating = c(dnorm(.8, mean=5, sd=1)))
+
+plot1 <- ggplot(dat, aes(x=rating)) + geom_density(col = "blue", fill = "blue", alpha = 0.5) +
+  xlab("") + 
+  labs(title = "Densidad extroversion") + theme_bw(16, "serif") + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+print(plot1)
+
+#Densidad creatividad
+dt(.8, df=10)
+
+dat <- data.frame(variables = factor(rep(c("Creatividad"), each=50)), 
+                  rating = c(dt(.8, df=10)))
+
+plot1 <- ggplot(dat, aes(x=rating)) + geom_density(col = "blue", fill = "blue", alpha = 0.5) +
+  xlab("") + 
+  labs(title = "Densidad creatividad") + theme_bw(16, "serif") + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+print(plot1)
 
 
 #8. Distribución Chi-cuadrado
 #La variable X sigue una distribución Chi-cuadrado con 28 grados de libertad.
 #   1. Calcule la probabilidad de que X sea mayor de 7,5. (1 punto)
 #      NOTA: Tenga especial cuidado en ver en que cola se debe calcular.
+
+pchisq(c(7.5), df=28, lower.tail=FALSE)
+
 #   2. Dibuje la gráfica de la función de densidad. (1 punto)
+
+dat <- data.frame(variables = factor(rep(c("Creatividad"), each=200)), 
+                  rating = c(dchisq(c(7.5), df=28)))
+
+plot1 <- ggplot(dat, aes(x=rating)) + geom_density(col = "blue", fill = "blue", alpha = 0.5) +
+  xlab("") + 
+  labs(title = "Densidad chi-cuadrado") + theme_bw(16, "serif") + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+print(plot1)
+
 
 
 
