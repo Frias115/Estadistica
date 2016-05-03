@@ -1,3 +1,4 @@
+
 if (!"package:ggplot2" %in% search() ||!"package:grid" %in% search()) { 
   install.packages("ggplot2")
   install.packages("grid")
@@ -86,7 +87,7 @@ plot1 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "blue
 print(plot1)
 
 #Formula
-pgeom(6, prob = 1/10)
+dgeom(5, prob = 1/10)
 
 
 #-----Modelos unidimensionales continuos-----:
@@ -120,8 +121,7 @@ result
 #Densidad extroversion
 dnorm(.8, mean=5, sd=1)
 
-dat <- data.frame(variables = factor(rep(c("Extroversion"), each=50)), 
-                  rating = c(dnorm(.8, mean=5, sd=1)))
+dat <- data.frame(rating = c(dnorm(.8, mean=5, sd=1)))
 
 plot1 <- ggplot(dat, aes(x=rating)) + geom_density(col = "blue", fill = "blue", alpha = 0.5) +
   xlab("") + 
